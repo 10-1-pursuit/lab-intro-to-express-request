@@ -1,10 +1,14 @@
 const express = require("express");
 const app = express();
 
+const pokemon = require("./models/pokemon.json")
+console.log(pokemon[0]);
+
 app.get("/", (req, res) => {
-  res.send("Testing");
+  res.send("Testing 1 2 1 2");
 });
 
+/////// New Project Name Generator ///////
 app.get("/:verb/:adjective/:noun/", (req, res)=>{
     console.log(req.params);
     const {verb, adjective, noun} = req.params;
@@ -19,6 +23,7 @@ app.get("/bugs", (req,res)=>{
         </body>`)
 })
 
+/////// 99 Little Bugs In the Code ///////
 app.get("/bugs/:numberOfBugs", (req, res)=>{
     const {numberOfBugs} = req.params;
     let sumOfBugs= Number(numberOfBugs) + Number(2);
@@ -36,8 +41,25 @@ app.get("/bugs/:numberOfBugs", (req, res)=>{
     }
 })
 
+/////// Poke-Express ///////
+app.get("/pokemon", (req, res)=>{
+    res.send(pokemon)
+})
 
+// app.get("/pokemon/:indexOfArray", (req, res)=>{
+//     const {indexOfArray}=req.params
+//     if(pokemon[indexOfArray]){
+//         res.send(pokemon[indexOfArray])
+//     } else {
+//         res.send("Sorry, no pokemon fount at /pokemon"+[indexOfArray])
+//     }
+// })
 
+app.get("/pokemon/:search", (req, res)=>{
+    const {name} = req.query
+    console.log(req.query)
+    res.send(req.params.search + name)
+})
 
 
 
