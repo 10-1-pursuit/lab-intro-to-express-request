@@ -1,6 +1,9 @@
 // DEPENDENCIES
 const express = require("express");
 
+const pokemon = require("./models/pokemon.json");
+console.log(pokemon[0]);
+
 // CONFIGURATION
 const app = express();
 
@@ -76,10 +79,48 @@ res.send(`<h1> ${numberOfBugs} little bugs in the code </h1>
 
 
 // ROUTES
-app.get("/jumping/joyous/jellybean", (req, res) => {
-  res.send("Congratulations on starting a new project called jumping-joyous-jellybean!");
+app.get("/:verb/:adjective/:noun", (req, res) => {
+
+    const {verb,adjective,noun}=req.params;
+    const projectName=`${verb}-${adjective}-${noun}`;
+
+
+  res.send(`Congratulations on starting a new project called ${projectName}!`);
 });
 
+
+app.get('/pokemon',(req,res)=>{
+
+
+
+
+    res.send(`<body>
+
+
+    
+    <div>"${JSON.stringify(pokemon)
+    }"</div>
+    
+    
+    </body>`)
+})
+
+app.get('/pokemon/:indexOfArray' ,(req,res)=>{
+
+    const index= parseInt(req.params.indexOfArray);
+    if(index ,0 || index >= pokemon.length){
+
+        res.send(`Sorry, no pokemon found at /pokemon/${index}`);
+    }else{
+
+            res.send(pokemon[index])
+
+    }
+    
+
+
+
+})
 
 
   
