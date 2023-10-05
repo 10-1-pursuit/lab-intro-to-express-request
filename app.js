@@ -57,27 +57,17 @@ app.get('/pokemon/:indexOfArray', (req, res) => {
 
 app.get('/pokemon/search', (req, res) => {
   
- 
+  const { query1 } = req.query
+  const targetPoke = pokemon.filter(object => object.name === query1)
 
-    if(req.query === pokemon.includes(object => object.name === req.query)){
-       res.send(object)
-    } else {
-      res.send("we don't have it");
-    }
-    
-  }
+ if(!targetPoke){
+  res.send("sorry, no pokemon found.")
+ } else {
+  res.send(targetPoke)
+ }
+});
+
   
-  
-  )
-
-
-
- 
-
-
-
-
-
 
 
 
