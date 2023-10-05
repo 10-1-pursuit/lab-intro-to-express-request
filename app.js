@@ -55,7 +55,7 @@ app.get("/pokemon/:index", (request, response) => {
   }
 });
 
-// - New Project Name Generator
+// - New Project Name Generator *moved down*
 app.get("/:verb/:adjective/:noun", (request, response) => {
   const { verb, adjective, noun } = request.params;
   const generatedName = `${verb}-${adjective}-${noun}`;
