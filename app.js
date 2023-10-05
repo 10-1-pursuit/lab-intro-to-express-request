@@ -1,5 +1,7 @@
 //Dependencies
 const express = require('express');
+const pokemon = require("./models/pokemon.json")
+console.log(pokemon[0])
 
 //Configuration
 const app = express();
@@ -31,7 +33,51 @@ app.get('/bugs/:numOfBugs', (req, res) =>{
   } else {
     res.send(`<a href="/bugs">Start Over</a>`)
   }
+});
+
+
+app.get('/pokemon', (req, res) => {
+
+ res.send(pokemon)
 })
+
+
+app.get('/pokemon/:indexOfArray', (req, res) => { 
+
+  const { indexOfArray } = req.params;
+
+  const index = parseInt(indexOfArray);
+  if(index < 0 || index >= pokemon.length || index === NaN){
+    res.send(`sorry, no pokemon found at "/pokemon/${indexOfArray}"`)
+  }else{
+   res.send(pokemon[index])
+  }
+
+ })
+
+app.get('/pokemon/search', (req, res) => {
+  
+ 
+
+    if(req.query === pokemon.includes(object => object.name === req.query)){
+       res.send(object)
+    } else {
+      res.send("we don't have it");
+    }
+    
+  }
+  
+  
+  )
+
+
+
+ 
+
+
+
+
+
 
 
 
