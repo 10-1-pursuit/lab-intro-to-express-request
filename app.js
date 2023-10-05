@@ -1,4 +1,3 @@
-// DEPENDENCIES
 const express = require("express");
 
 // CONFIGURATION
@@ -7,14 +6,6 @@ const app = express();
 // ROUTES
 app.get("/", (request, response) => {
   response.send("Welcome 99 Pokemon");
-});
-
-// - New Project Name Generator
-app.get("/:verb/:adjective/:noun", (request, response) => {
-  const { verb, adjective, noun } = request.params;
-  response.send(
-    `Congratulations on starting a new project called ${verb}-${adjective}-${noun}!`
-  );
 });
 
 // - 99 Little Bugs In the Code
@@ -30,7 +21,7 @@ app.get("/bugs/:numberOfBugs", (request, response) => {
 
   if (numberOfBugs > 199) {
     response.send(
-      "<h3><font color='red'>Too many bugs!! Start over!</font color></h3>"
+      "<a href='/bugs/'><h3><font color='red'>Too many bugs!! Start over!</font color></h3></a>"
     );
   } else {
     response.send(
@@ -62,6 +53,15 @@ app.get("/pokemon/:index", (request, response) => {
   } else {
     response.json(pokemon[index]);
   }
+});
+
+// - New Project Name Generator
+app.get("/:verb/:adjective/:noun", (request, response) => {
+  const { verb, adjective, noun } = request.params;
+  const generatedName = `${verb}-${adjective}-${noun}`;
+  response.send(
+    `Congratulations on starting a new project called ${generatedName}!`
+  );
 });
 
 // EXPORT
