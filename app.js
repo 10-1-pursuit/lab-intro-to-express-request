@@ -2,6 +2,10 @@ const express = require("express");
 
 const app = express();
 
+
+const pokemon = require("./models/pokemon.json");
+// console.log(pokemon[0])
+
 app.get("/:verb/:adjective/:noun", (req,res)=>{
     const {verb,adjective,noun} = req.params;
     res.send("Congratulations on starting a new project called " + verb +"-"+adjective+"-"+noun+"!")
@@ -26,7 +30,7 @@ app.get("/bugs/:numberOfBugs", (req,res)=>{
         </body>`)
     }
     else {
-        
+
     res.send(`<body>
     <h1>
     ${numberOfBugs} little bugs in the code
@@ -36,5 +40,31 @@ app.get("/bugs/:numberOfBugs", (req,res)=>{
     </body>`)
     }
 })
+
+app.get("/pokemon", (req,res)=>{
+    res.send(pokemon)
+})
+
+app.get("/pokemon/:search", (req,res)=>{
+  
+    const {name} = req.query;
+
+    const findPokemon = pokemon.find(poke => poke.name.toLowerCase() === name.toLowerCase())
+    if(findPokemon){
+     res.json(findPokemon)
+    }
+     res.send(req.params.search)
+})
+
+
+app.get("/pokemon/:index", (req,res)=>{
+    const index = req.params.index;
+    if(pokemon[index]){
+        res.send(pokemon[index])
+    }else{
+        res.send("sorry, no pokemon found at "+[index])
+    }
+})
+
 
 module.exports = app
