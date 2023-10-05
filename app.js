@@ -6,9 +6,6 @@ const app = express();
 
 //Routes
 
-app.get('/bugs', (req, res) =>{
-  res.status(420).send('Hello World')
-})
 
 //Index Route
  
@@ -18,18 +15,23 @@ app.get('/bugs', (req, res) =>{
 //    res.send(`Congratulations on starting a new project called ${verb}-${adj}-${noun}!`)
 // });
 
+let numOfBugs = 99
+
+app.get('/bugs', (req, res) => {
+  res.send(`<h1>${numOfBugs} Litte bugs in the Code</h1><a href="/bugs/${numOfBugs}"> pull one down, patch it around</a>`)
+
+})
+
 app.get('/bugs/:numOfBugs', (req, res) =>{
-  let numOfBugs = 99;
+  numOfBugs = parseInt(req.params.numOfBugs)
 
   if(numOfBugs < 200){
-    numOfBugs + 2
-
-    res.send(`<h1>${numOfBugs} Little bugs in the code"</h1><br></br><a href="/bugs/${numOfBugs + 2}">pull one down, patch it around"</a>`)
+    numOfBugs += 2
+    res.send(`<h1>${numOfBugs} Little bugs in the code"</h1><br></br><a href="/bugs/${numOfBugs}">pull one down, patch it around"</a>`)
   } else {
     res.send(`<a href="/bugs">Start Over</a>`)
-
   }
-} )
+})
 
 
 
