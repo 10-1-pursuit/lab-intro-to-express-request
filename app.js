@@ -36,7 +36,7 @@ app.get("/bugs", (request, response) => {
 
     const jingle = `${numberOfBugs} little bugs in the code`;
 
-    const linkTitle = "Pull one down, Patch it around";
+    const linkTitle = "<h1>Pull one down, Patch it around </h1>";
 
     if (numberOfBugs <= 200) {
 
@@ -55,7 +55,7 @@ app.get("/bugs/:numberOfBugs", (request, response) => {
 
     const { numberOfBugs } = request.params;
     const bugsLeftOver = `${numberOfBugs} little bugs in the code`;
-    const linkTitle = "Pull one down, Patch it around";
+    const linkTitle = "<h1>Pull one down, Patch it around</h1>";
 
     if (numberOfBugs <= 200) {
 
