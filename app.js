@@ -46,20 +46,22 @@ app.get("/pokemon", (req, res)=>{
     res.send(pokemon)
 })
 
-// app.get("/pokemon/:indexOfArray", (req, res)=>{
-//     const {indexOfArray}=req.params
-//     if(pokemon[indexOfArray]){
-//         res.send(pokemon[indexOfArray])
-//     } else {
-//         res.send("Sorry, no pokemon fount at /pokemon"+[indexOfArray])
-//     }
-// })
-
-app.get("/pokemon/:search", (req, res)=>{
-    const {name} = req.query
-    console.log(req.query)
-    res.send(req.params.search + name)
+app.get("/pokemon/:indexOfArray", (req, res)=>{
+    const {indexOfArray}=req.params
+    if(pokemon[indexOfArray]){
+        res.send(pokemon[indexOfArray])
+    } else {
+        res.send("Sorry, no pokemon fount at /pokemon"+[indexOfArray])
+    }
 })
+
+app.get("/pokemon/:search/:find/:name", (req, res)=>{
+    console.log(req.query) 
+    const {pokename} = req.query
+    res.send(req.params.name + pokename);
+
+})
+
 
 
 
