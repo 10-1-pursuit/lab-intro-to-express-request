@@ -21,9 +21,10 @@ app.get("/words", (request, response) => {
 
 app.get("/words/:verb/:adjective/:noun", (request, response) => {
 
-    const { verb, adjective, noun } = request.params
+    const { verb, adjective, noun } = request.params;
+    const projectName = `${verb} - ${adjective} - ${noun}`;
 
-    response.send(`Congratulations on starting a new project called` + words(verb, adjective, noun))
+    response.send(`Congratulations on starting a new project called + ${projectName}`);
 });
 
 
