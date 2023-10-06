@@ -35,12 +35,23 @@ app.get('/bugs/:numOfBugs', (req, res) =>{
   }
 });
 
-
 app.get('/pokemon', (req, res) => {
 
  res.send(pokemon)
 })
 
+app.get('/pokemon/search', (req, res) => {
+  
+  const { name } = req.query //request.query.name
+  const targetPoke = pokemon.filter(object => object.name.toLowerCase() === name.toLowerCase())  //to handle mixed letter casing. 
+  
+  console.log(targetPoke, name)
+  if(!targetPoke){
+    res.send("sorry, no pokemon found." )
+  } else {
+    res.json(targetPoke)
+  }
+});
 
 app.get('/pokemon/:indexOfArray', (req, res) => { 
 
@@ -54,20 +65,6 @@ app.get('/pokemon/:indexOfArray', (req, res) => {
   }
 
  })
-
-app.get('/pokemon/search', (req, res) => {
-  
-  const { query1 } = req.query
-  const targetPoke = pokemon.filter(object => object.name === query1)
-
- if(!targetPoke){
-  res.send("sorry, no pokemon found.")
- } else {
-  res.send(targetPoke)
- }
-});
-
-  
 
 
 
