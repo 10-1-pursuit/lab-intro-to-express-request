@@ -10,7 +10,7 @@ app.get('/:verb/:adjective/:noun', (req,res)=> {
     res.send(`Congratulations on starting a new project called ${projectName}!`);
     
 })
-
+// 99 little bugs in the code//
 app.get("/bugs", (req, res) => {
     res.send(`
     <body>
@@ -36,6 +36,34 @@ app.get("/bugs/:numberOfBugs", (req, res)=>{
         </body>`); 
 }
 });
-app.listen(8888, () => {
-    console.log("Server is running on port 8888");
+//Pokemon API//
+
+app.get ("/pokemon", (request, response) => {
+response.send(JSON.stringify(pokemonData));
 });
+
+
+app.get("/pokemon/:indexOfArray", (req,res) => {
+    const { indexOfArray} = req.params;
+    const index = parseInt(indexOfArray);
+    
+    if (isNaN(index) || index < 0 || index >= pokemonData.length) {
+        res.status(404).send (`Sorry, no pokemon found at /pokemon/${indexOfArray}`);
+    } else{
+        res.json(pokemonData[index]);
+    }
+});
+
+app.get("/pokemong/search", (req,res) => {
+    const {name} = req.query;
+    const result = pokemonData.find((pokemon) =>
+    pokemon.name.toLowerCase()=== name.toLowerCase()
+    );
+    if(!result) {
+        res.status(404).send(`Sorry, no pokemon found with the name '${name}'`);
+    } else {
+        res.json(result);
+    }
+});
+
+module.export = app
