@@ -53,7 +53,7 @@ app.get("/pokemon/:search", (req,res)=>{
     if(findPokemon){
      res.json(findPokemon)
     }
-     res.send(req.params.search)
+  res.status(404).json({error: `Sorry, can't find ${name}`})
 })
 
 
