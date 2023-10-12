@@ -2,7 +2,7 @@ const express = require('express')
 const pokemon = require('./models/pokemon.json')
 const app = express()
 
-console.log(pokemon[0])
+
 
 app.get('/', (req, res) => {
     res.send('This is my App!')
@@ -53,6 +53,26 @@ app.get('/bugs/:number', (req, res) => {
 app.get('/pokemon', (req, res) => {
     res.send(pokemon)
 })
+
+app.get(`/pokemon/search`, (req, res) => {
+    const { name } = req.query;
+    for (let poke of pokemon) {
+        if (poke.name === name) {
+            res.send(poke)
+        }
+    }
+})
+
+
+app.get('/pokemon/:indexOfArray', (req, res) => {
+    const { indexOfArray } = req.params;
+    if (pokemon[indexOfArray]) {
+        res.send(pokemon[indexOfArray])
+    } else {
+        res.send(`sorry, no pokemon found at /pokemon${indexOfArray}`)
+    }
+})
+
 
 
 module.exports = app
