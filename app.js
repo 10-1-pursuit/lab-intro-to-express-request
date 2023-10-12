@@ -57,7 +57,7 @@ app.get('/pokemon', (req, res) => {
 app.get(`/pokemon/search`, (req, res) => {
     const { name } = req.query;
     for (let poke of pokemon) {
-        if (poke.name === name) {
+        if (poke.name === (name.charAt(0).toUpperCase() + name.slice(1))) {
             res.send(poke)
         }
     }
