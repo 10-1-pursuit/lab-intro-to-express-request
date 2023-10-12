@@ -16,13 +16,10 @@ app.get(`/:verb/:adjective/:noun`, (req, res) => {
 app.get('/bugs', (req, res) => {
     let number = '99';
 
-    res.send(`<body>
-    <p>
+    res.send(`
     ${number} little bugs in the code
-    </p>
     <a href='/bugs/${(Number(number) + 2).toString()}'>Pull one down, patch it around
-    </a>
-</body>`)
+    </a>`)
 })
 
 app.get('/bugs/:number', (req, res) => {
@@ -30,20 +27,15 @@ app.get('/bugs/:number', (req, res) => {
 
     if (Number(number) >= 200) {
         res.send(`
-        <body>
-        <p>
         ${number} little bugs in the code
-        </p>
         <a href='/bugs'> Too many bugs!! Start over!
         </a>
-        </body>
         `)
     } else {
         res.send(`
     ${number} little bugs in the code
     <a href='/bugs/${(Number(number) + 2).toString()}'> Pull one down, patch it around
-    </a>
-</body>`)
+    </a>`)
     }
 })
 
