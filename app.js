@@ -1,5 +1,8 @@
 const express = require('express')
+const pokemon = require('./models/pokemon.json')
 const app = express()
+
+console.log(pokemon[0])
 
 app.get('/', (req, res) => {
     res.send('This is my App!')
@@ -24,7 +27,7 @@ app.get('/bugs', (req, res) => {
 
 app.get('/bugs/:number', (req, res) => {
     let number = req.params.number;
-    console.log(number)
+
     if (Number(number) > 200) {
         res.send(`
         <body>
@@ -47,7 +50,9 @@ app.get('/bugs/:number', (req, res) => {
     }
 })
 
-app.get('/bugs/:number')
+app.get('/pokemon', (req, res) => {
+    res.send(pokemon)
+})
 
 
 module.exports = app
