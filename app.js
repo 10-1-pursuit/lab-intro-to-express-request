@@ -5,7 +5,7 @@ const app = express()
 
 
 app.get('/', (req, res) => {
-    res.send('This is my App!')
+    res.send('Welcome 99 Pokemon')
 }
 )
 
@@ -20,7 +20,7 @@ app.get('/bugs', (req, res) => {
     <p>
     ${number} little bugs in the code
     </p>
-    <a href='/bugs/${(parseInt(number) + 2).toString()}'> pull one down, patch it around
+    <a href='/bugs/${(Number(number) + 2).toString()}'>Pull one down, patch it around
     </a>
 </body>`)
 })
@@ -28,13 +28,13 @@ app.get('/bugs', (req, res) => {
 app.get('/bugs/:number', (req, res) => {
     let number = req.params.number;
 
-    if (Number(number) > 200) {
+    if (Number(number) >= 200) {
         res.send(`
         <body>
         <p>
         ${number} little bugs in the code
         </p>
-        <a href='/bugs'> Start Over
+        <a href='/bugs'> Too many bugs!! Start over!
         </a>
         </body>
         `)
@@ -55,10 +55,16 @@ app.get('/pokemon', (req, res) => {
 })
 
 app.get(`/pokemon/search`, (req, res) => {
-    const { name } = req.query;
+    const { name } = req.query
+    const searchedName = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+
+
+
     for (let poke of pokemon) {
-        if (poke.name === (name.charAt(0).toUpperCase() + name.slice(1))) {
-            res.send(poke)
+        if (poke.name === searchedName) {
+            res.send([poke])
+        } else {
+            res.send([])
         }
     }
 })
@@ -69,7 +75,7 @@ app.get('/pokemon/:indexOfArray', (req, res) => {
     if (pokemon[indexOfArray]) {
         res.send(pokemon[indexOfArray])
     } else {
-        res.send(`sorry, no pokemon found at /pokemon${indexOfArray}`)
+        res.send(`Sorry, no pokemon found at ${indexOfArray}`)
     }
 })
 
