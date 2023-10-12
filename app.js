@@ -40,11 +40,8 @@ app.get('/bugs/:number', (req, res) => {
         `)
     } else {
         res.send(`
-    <body>
-    <p>
     ${number} little bugs in the code
-    </p>
-    <a href='/bugs/${(parseInt(number) + 2).toString()}'> pull one down, patch it around
+    <a href='/bugs/${(Number(number) + 2).toString()}'> Pull one down, patch it around
     </a>
 </body>`)
     }
