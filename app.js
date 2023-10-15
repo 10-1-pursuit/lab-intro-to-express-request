@@ -18,14 +18,19 @@ app.get("/bugs", (req, res) => {
 });
 
 app.get("/bugs/:numberOfBugs" , (req, res)=> {
-    res.send('101 little bugs in the code <a href="/bugs/101">pull one down, patch it around</a>')
-})
+  const numberOfBugs = parseInt(req.params.numberOfBugs);
+    if (numberOfBugs <= 200) {
+       
+        const nextNumberOfBugs = numberOfBugs + 2;
+        const linkText = `pull one down, patch it around`;
+        const linkHref = `/bugs/${nextNumberOfBugs}`;
+        res.send(`${numberOfBugs} little bugs in the code<br><a href="${linkHref}">${linkText}</a>`);
+    } else {
+        
+        res.send('Too many bugs!! Start over!<br><a href="/bugs">Go back to home page</a>');
+    }
+});
 
-app.get("/bugs/101", (req, res) => {
-    res.send(
-      '99 little bugs in the code <a href="/bugs/101">pull one down, patch it around</a>'
-    );
-  });
 
 app.get("/", (req, res) => {
   const pokemonCount = req.pokemon.length;
