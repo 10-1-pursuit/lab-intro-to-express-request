@@ -1,10 +1,14 @@
 const express = require("express");
 const app = express();
 
+const pokemon = require("./models/pokemon.json");
+console.log(pokemon[0]);
 
-
-app.get("/verb/adj/noun", (req, res) => {
-    res.send("Congratulations on starting a new project called /verb/adj/noun");
+app.get("/:verb/:adj/:noun", (req, res) => {
+  const {verb, adj, noun} = req.params
+  const projNameGen = `${verb}-${adj}-${noun}`
+  const response = `Congratulations on starting a new project called ${projNameGen}`
+    res.send(response);
   });
 
 app.get("/", (req, res) => {
