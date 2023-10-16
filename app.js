@@ -36,9 +36,21 @@ app.get("/bugs/:numberOfBugs" , (req, res)=> {
 });
 
 
-app.get("/", (req, res) => {
-  const pokemonCount = req.pokemon.length;
-  res.send(`Welcome ${pokemonCount} Pokemon`);
+app.get("/pokemon", (req, res) => {
+res.status(200).send(pokemon)
+  // const pokemonCount = req.pokemon.length;
+  // res.send(`Welcome ${pokemonCount} Pokemon`);
+});
+
+app.get("/pokemon/:indexOfArray", (req, res) => {
+  const indexOfArray = req.params.indexOfArray;
+  const pokemonId = (indexOfArray >= 0 &&  indexOfArray < pokemon.length)
+  ? `Pokemon at index ${indexOfArray}: ${pokemon[indexOfArray]}`
+  : `Sorry, no Pokemon found at /pokemon/${indexOfArray}`;
+
+const status = (indexOfArray >= 0 && indexOfArray < pokemon.length) ? 200 : 404;
+
+res.status(status).send(pokemonId);
 });
 
 module.exports = app;

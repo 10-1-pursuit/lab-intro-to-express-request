@@ -93,7 +93,7 @@ console.log(pokemon[0]);
 
 - make a route `/pokemon` that will show a list of all the pokemon
 - make a route `/pokemon/:indexOfArray` that returns 1 pokemon at that array position
-  - if the array position is invalid or there is no pokemon at that position, instead send `sorry, no pokemon found at /pokemon[indexOfArray]` - where `[indexOfArray]` is the value from the URL that the user has entered
+  - if the array position is invalid or there is no pokemon at that position, instead send `sorry, no pokemon found at /pokemon[index]` - where `[index]` is the value from the URL that the user has entered
 - make a route /pokemon/search - where a user can add a query parameter
   such as http://localhost:8888/pokemon/search?name=oddish
 
