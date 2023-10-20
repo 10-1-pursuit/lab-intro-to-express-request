@@ -66,4 +66,45 @@ app.get("/pokemon/:indexOfArray", (req, res) => {
 
 console.log(pokemon[24]);
 
+// Bonus
+app.get("/pokemon-pretty", (req, res) => {
+  const pokemonListHTML = pokemon.map((poke, index) => {
+    return `<li><a href="/pokemon-pretty/${index}">${poke.name}</a></li>`;
+  });
+
+  const htmlResponse = `
+    <center>
+    <h1>List of Pokemon</h1>
+    ${pokemonListHTML.join("")}
+    </center>
+  `;
+
+  res.send(htmlResponse);
+});
+
+app.get("/pokemon-pretty/:indexOfArray", (req, res) => {
+  const indexOfArray = req.params.indexOfArray;
+  const selectedPokemon = pokemon[indexOfArray];
+
+  if (selectedPokemon) {
+    const htmlResponse = `
+    <center>
+      <h1>${selectedPokemon.name}</h1>
+      <img src="http://img.pokemondb.net/artwork/${selectedPokemon.name.toLowerCase()}.jpg" alt="${selectedPokemon.name} Image">
+      <p>Type: ${selectedPokemon.type.join(", ")}</p>
+      <p>Stats:</p>
+        <li>HP: ${selectedPokemon.stats.hp}</li>
+        <li>Attack: ${selectedPokemon.stats.attack}</li>
+      </center>
+    `;
+
+    res.send(htmlResponse);
+  } else {
+    res.status(404).send(`Sorry, no Pokemon found at /pokemon-pretty/${indexOfArray}`);
+  }
+});
+
+
+
+
 module.exports = app;
