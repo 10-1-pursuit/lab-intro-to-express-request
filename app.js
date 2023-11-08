@@ -17,8 +17,12 @@ app.get('/pokemon', (req, res) => {
 });
 
 app.get('/pokemon/:indexOfArray', (req, res) => {
-
-    res.send(pokemon[req.params.indexOfArray]);
+    const {indexOfArray}= req.params
+    if (pokemon[indexOfArray]) {
+        res.send(pokemon[req.params.indexOfArray]);
+    } else {
+        res.send(`Sorry, no pokemon found at ${pokemon[indexOfArray]}`);
+    }
 });
 
 
