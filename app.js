@@ -16,14 +16,29 @@ app.get('/pokemon', (req, res) => {
     res.send(pokemon);
 });
 
+app.get("/pokemon/search", (req, res) => {
+     const name= req.query.name
+    //  console.log(req.query, ` ${name}`);
+    console.log(req.query, + name);
+
+  res.send(req.params.index);
+});
+
+
+
+app.get('/pokemon-pretty/', (req, res) => {
+    res.send(`<h1>${pokemon}</h1>`)
+});
+
 app.get('/pokemon/:indexOfArray', (req, res) => {
-    const {indexOfArray}= req.params
+    const { indexOfArray } = req.params
     if (pokemon[indexOfArray]) {
         res.send(pokemon[req.params.indexOfArray]);
     } else {
-        res.send("Sorry, no pokemon found at " +`${[indexOfArray]}`);
+        res.send("Sorry, no pokemon found at " + `${[indexOfArray]}`);
     }
 });
+
 
 
 
