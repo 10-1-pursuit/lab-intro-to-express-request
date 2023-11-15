@@ -15,9 +15,7 @@ app.get("/:verb/:adjective/:noun", (req, res) => {
     //     const {foo} = req.query;
     res.send(`Congratulations on starting a new project called ${verb}-${adjective}-${noun}!`);
 });
-app.listen(PORT, () => {
-    console.log(`Listening on port ${PORT}`);
-});
+
 
 
 
