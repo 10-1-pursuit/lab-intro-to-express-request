@@ -1,7 +1,8 @@
 const express = require("express");
 
-const app = express();
 
+
+const app = express();
 
 const { PORT } = process.env
 
@@ -31,20 +32,29 @@ app.get('/bugs/:numberOfBugs', (req, res) => {
         res.send(` <h1>${numberOfBugs} little bugs in the code</h1>
     <a href="/bugs">Start over</a>
     `);
-    }else{
+    } else {
         const nextNumberOfBugs = numberOfBugs + 2;
-    res.send(`
+        res.send(`
       <h1>${numberOfBugs} little bugs in the code</h1>
       <a href="/bugs/${nextNumberOfBugs}">Pull one down, patch it around</a>`
-      );
+        );
     }
-    });
+});
 
 
+const pokemonData = require("./models/pokemon.json");
+console.log(pokemonData[0]);
+
+app.get("/pokemon", (req, res) => {
+
+    res.json(pokemonData)
+});
 
 
-
-
+app.get('/pokemon/:indexOfArray', (req, res) => {
+    const indexOfArray = req.params.indexOfArray
+    res.send(pokemonData[indexOfArray])
+})
 
 
 
